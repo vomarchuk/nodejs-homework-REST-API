@@ -1,15 +1,25 @@
 const express = require('express');
 const router = express.Router();
 
-const { NotFound } = require('http-error');
+const { NotFound, BadRequest } = require('http-error');
 const Joi = require('joi');
 
 const contactOperations = require('../../models/contacts/index');
 
-const joiSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.number().required(),
+const {
+  name,
+  number,
+} = require('../../models/contacts/contactOperations/validaveOptions');
+
+const validateAddContact = Joi.object({
+  name: Joi.string().min(3).max(30).pattern(name.pattern, 'name').required(),
+  email: Joi.string().email().required(),
+  phone: Joi.string().pattern(number.pattern, 'phone').required(),
+});
+const validateUpdateContact = Joi.object({
+  name: Joi.string().min(3).max(30).pattern(name.pattern, 'name'),
+  email: Joi.string().email(),
+  phone: Joi.string().pattern(number.pattern, 'phone'),
 });
 
 router.get('/', async (req, res, next) => {
@@ -18,11 +28,6 @@ router.get('/', async (req, res, next) => {
     res.json({ status: 'success', code: 200, data: { contacts } });
   } catch (error) {
     next(error);
-    // res.status(500).json({
-    //   status: error,
-    //   code: 500,
-    //   message: 'Server error',
-    // });
   }
 });
 
@@ -44,11 +49,21 @@ router.get('/:contactId', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const { error } = joiSchema.validate(req.body);
-  if (error) {
+  console.log(req.body);
+  try {
+    const { error } = validateAddContact.validate(req.body);
+    if (error) {
+      throw new BadRequest(error.message);
+    }
+    const result = await contactOperations.addContact(req.body);
+    res.json({
+      status: 'success',
+      code: 201,
+      data: { result },
+    });
+  } catch (error) {
+    next(error);
   }
-
-  res.json({ message: 'template message' });
 });
 
 router.delete('/:contactId', async (req, res, next) => {
@@ -64,8 +79,30 @@ router.delete('/:contactId', async (req, res, next) => {
   }
 });
 
-router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' }); // поменять можно на пут
+router.patch('/:contactId', async (req, res, next) => {
+  try {
+    const { error } = validateUpdateContact.validate(req.body);
+    if (error) {
+      throw new BadRequest(error.message);
+    }
+    const { contactId } = req.params;
+    const result = await contactOperations.updateContactById(
+      contactId,
+      req.body,
+    );
+    if (!result) {
+      throw new NotFound(`Product with id=${id} not found`);
+    }
+    res.json({
+      status: 'success',
+      code: 200,
+      data: {
+        result,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

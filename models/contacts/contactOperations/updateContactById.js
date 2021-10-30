@@ -1,16 +1,15 @@
 const listContacts = require('./listContacts');
 const updateContacts = require('./updateContacts');
 
-const removeContact = async contactId => {
+const updateContactById = async (contactId, body) => {
   const contacts = await listContacts();
-  console.table(contacts);
   const index = contacts.findIndex(({ id }) => id === contactId);
   if (index === -1) {
     return null;
   }
-  const removeProduct = contacts.splice(index, 1);
+  contacts[index] = { ...contacts[index], ...body };
   await updateContacts(contacts);
-  return removeProduct;
+  return contacts[index];
 };
 
-module.exports = removeContact;
+module.exports = updateContactById;
