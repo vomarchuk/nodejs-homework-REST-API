@@ -1,4 +1,4 @@
-const path = require('path');
-const contactPath = path.join(__dirname, './contacts.json');
+const path = require('path')
+const contactPath = path.join(__dirname, './contacts.json')
 
-module.exports = contactPath;
+module.exports = contactPath
