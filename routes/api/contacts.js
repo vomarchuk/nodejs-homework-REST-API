@@ -2,25 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 const { NotFound, BadRequest } = require('http-error');
-const Joi = require('joi');
 
 const contactOperations = require('../../models/contacts/index');
 
 const {
-  name,
-  number,
+  validateAddContact,
+  validateUpdateContact,
 } = require('../../models/contacts/contactOperations/validaveOptions');
-
-const validateAddContact = Joi.object({
-  name: Joi.string().min(3).max(30).pattern(name.pattern, 'name').required(),
-  email: Joi.string().email().required(),
-  phone: Joi.string().pattern(number.pattern, 'phone').required(),
-});
-const validateUpdateContact = Joi.object({
-  name: Joi.string().min(3).max(30).pattern(name.pattern, 'name'),
-  email: Joi.string().email(),
-  phone: Joi.string().pattern(number.pattern, 'phone'),
-});
 
 router.get('/', async (req, res, next) => {
   try {
@@ -36,7 +24,7 @@ router.get('/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
     const contact = await contactOperations.getContactById(contactId);
     if (!contact) {
-      throw new NotFound(`Contact with id=${id} not found`);
+      throw new NotFound(`Contact with id=${contactId} not found`);
     }
     res.json({
       status: 'success',
@@ -49,7 +37,6 @@ router.get('/:contactId', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  console.log(req.body);
   try {
     const { error } = validateAddContact.validate(req.body);
     if (error) {
@@ -71,7 +58,7 @@ router.delete('/:contactId', async (req, res, next) => {
     const { contactId } = req.params;
     const result = await contactOperations.removeContact(contactId);
     if (!result) {
-      throw new NotFound(`Contact with id=${id} not found`);
+      throw new NotFound(`Contact with id=${contactId} not found`);
     }
     res.json({ status: 'success', code: 200, message: 'Remove success' });
   } catch (error) {
@@ -91,7 +78,7 @@ router.patch('/:contactId', async (req, res, next) => {
       req.body,
     );
     if (!result) {
-      throw new NotFound(`Product with id=${id} not found`);
+      throw new NotFound(`Product with id=${contactId} not found`);
     }
     res.json({
       status: 'success',
