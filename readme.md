@@ -37,4 +37,6 @@
 - `npm lint:fix` &mdash; та же проверка линтера, но с автоматическими
   исправлениями простых ошибок
 
-login - Voma password - zTLYV8O5sVeXMvW5
+- login - Voma
+- password - zTLYV8O5sVeXMvW5
+  mongodb+srv://Voma:<password>@cluster0.bqck2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
