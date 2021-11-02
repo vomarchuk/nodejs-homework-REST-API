@@ -1,14 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-const { NotFound, BadRequest } = require('http-error')
+const { NotFound } = require('http-error')
 
 const contactOperations = require('../../models/contacts/index')
+
+const validation = require('../../middleware/validation')
 
 const {
   validateAddContact,
   validateUpdateContact,
-} = require('../../models/contacts/contactOperations/validaveOptions')
+} = require('../../middleware/validaveOptions')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -40,12 +42,8 @@ router.get('/:contactId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/', validation(validateAddContact), async (req, res, next) => {
   try {
-    const { error } = validateAddContact.validate(req.body)
-    if (error) {
-      return next(new BadRequest(error.message))
-    }
     const result = await contactOperations.addContact(req.body)
     res.status(201).json({
       status: 'success',
@@ -74,12 +72,10 @@ router.delete('/:contactId', async (req, res, next) => {
   }
 })
 
-router.patch('/:contactId', async (req, res, next) => {
-  try {
-    const { error } = validateUpdateContact.validate(req.body)
-    if (error) {
-      return next(new BadRequest(error.message))
-    }
+router.patch(
+  '/:contactId',
+  validation(validateUpdateContact),
+  async (req, res, next) => {
     const { contactId } = req.params
     const result = await contactOperations.updateContactById(
       contactId,
@@ -95,9 +91,7 @@ router.patch('/:contactId', async (req, res, next) => {
         result,
       },
     })
-  } catch (error) {
-    next(error)
-  }
-})
+  },
+)
 
 module.exports = router
