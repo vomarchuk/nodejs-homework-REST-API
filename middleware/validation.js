@@ -1,7 +1,7 @@
 const { BadRequest } = require('http-error')
 
 const validation = schema => {
-  const validationMiddelware = (req, res, next) => {
+  const validationMiddelware = (req, _, next) => {
     try {
       const { error } = schema.validate(req.body)
       if (error) {
