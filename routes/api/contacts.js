@@ -24,7 +24,7 @@ router.get('/:contactId', async (req, res, next) => {
     const { contactId } = req.params
     const contact = await contactOperations.getContactById(contactId)
     if (!contact) {
-      throw new NotFound(`Contact with id=${contactId} not found`)
+      return next(new NotFound(`Contact with id=${contactId} not found`))
     }
     res.json({
       status: 'success',
@@ -40,7 +40,7 @@ router.post('/', async (req, res, next) => {
   try {
     const { error } = validateAddContact.validate(req.body)
     if (error) {
-      throw new BadRequest(error.message)
+      return next(new BadRequest(error.message))
     }
     const result = await contactOperations.addContact(req.body)
     res.json({
@@ -58,7 +58,7 @@ router.delete('/:contactId', async (req, res, next) => {
     const { contactId } = req.params
     const result = await contactOperations.removeContact(contactId)
     if (!result) {
-      throw new NotFound(`Contact with id=${contactId} not found`)
+      return next(new NotFound(`Contact with id=${contactId} not found`))
     }
     res.json({ status: 'success', code: 200, message: 'Remove success' })
   } catch (error) {
@@ -70,7 +70,7 @@ router.patch('/:contactId', async (req, res, next) => {
   try {
     const { error } = validateUpdateContact.validate(req.body)
     if (error) {
-      throw new BadRequest(error.message)
+      return next(new BadRequest(error.message))
     }
     const { contactId } = req.params
     const result = await contactOperations.updateContactById(
@@ -78,7 +78,7 @@ router.patch('/:contactId', async (req, res, next) => {
       req.body,
     )
     if (!result) {
-      throw new NotFound(`Product with id=${contactId} not found`)
+      return next(new NotFound(`Product with id=${contactId} not found`))
     }
     res.json({
       status: 'success',
