@@ -4,4 +4,11 @@ const {
   validateUpdateContact,
 } = require('./validaveSchema')
 
-module.exports = { validation, validateAddContact, validateUpdateContact }
+const controllerWrapper = require('./controllerWrapper')
+
+module.exports = {
+  validation,
+  validateAddContact,
+  validateUpdateContact,
+  controllerWrapper,
+}

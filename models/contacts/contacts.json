@@ -1,1 +1,38 @@
-[{"name":"Abbot Franks","email":"scelerisque@magnis.org","phone":"(000) 000-0000","id":"6bacaac4-3249-4f20-8433-79ffd056c24c"},{"name":"Cyrus Jackson","email":"nibh@semsempererat.com","phone":"(501) 472-5218","id":"63a0e1e1-479f-410c-93e4-88d6b753c1bc"},{"name":"Wylie Pope","email":"est@utquamvel.net","phone":"(692) 802-2949","id":"41e08efa-e35d-478e-9ad9-0dc63c6887b5"},{"name":"Kennedy Lane","email":"mattis.Cras@nonenimMauris.net","phone":"(542) 451-7038","id":"a248da24-86dd-4f95-875c-fe3e8aa3da7f"},{"name":"Kexx","email":"mattis.Cras@nonenimMauris.net","phone":"(542) 451-7038","id":"69191b45-e662-436a-96c8-b60972727460"},{"name":"Vova","email":"mattis.Cras@sdc.com","phone":"(999) 999-9999","id":"79b78f5a-06ac-4b36-8904-d4faef358307"}]
+[
+  {
+    "name": "Abbot Franks",
+    "email": "scelerisque@magnis.org",
+    "phone": "(000) 000-0000",
+    "id": "6bacaac4-3249-4f20-8433-79ffd056c24c"
+  },
+  {
+    "name": "Cyrus Jackson",
+    "email": "nibh@semsempererat.com",
+    "phone": "(501) 472-5218",
+    "id": "63a0e1e1-479f-410c-93e4-88d6b753c1bc"
+  },
+  {
+    "name": "Wylie Pope",
+    "email": "est@utquamvel.net",
+    "phone": "(692) 802-2949",
+    "id": "41e08efa-e35d-478e-9ad9-0dc63c6887b5"
+  },
+  {
+    "name": "Kennedy Lane",
+    "email": "mattis.Cras@nonenimMauris.net",
+    "phone": "(542) 451-7038",
+    "id": "a248da24-86dd-4f95-875c-fe3e8aa3da7f"
+  },
+  {
+    "name": "Kexx",
+    "email": "mattis.Cras@nonenimMauris.net",
+    "phone": "(542) 451-7038",
+    "id": "69191b45-e662-436a-96c8-b60972727460"
+  },
+  {
+    "name": "Vova",
+    "email": "mattis.Cras@sdc.com",
+    "phone": "(999) 999-9999",
+    "id": "79b78f5a-06ac-4b36-8904-d4faef358307"
+  }
+]

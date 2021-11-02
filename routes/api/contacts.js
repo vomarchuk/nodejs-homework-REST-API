@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 const contactControllers = require('../../controllers')
+const ctrl = contactControllers
+const controllerWrapper = require('../../middleware/controllerWrapper')
 
 const {
   validation,
@@ -9,18 +11,22 @@ const {
   validateUpdateContact,
 } = require('../../middleware')
 
-router.get('/', contactControllers.getAll)
+router.get('/', controllerWrapper(ctrl.getAll))
 
-router.get('/:contactId', contactControllers.getById)
+router.get('/:contactId', controllerWrapper(ctrl.getById))
 
-router.post('/', validation(validateAddContact), contactControllers.addContact)
+router.post(
+  '/',
+  validation(validateAddContact),
+  controllerWrapper(ctrl.addContact),
+)
 
-router.delete('/:contactId', contactControllers.removeContact)
+router.delete('/:contactId', controllerWrapper(ctrl.removeContact))
 
 router.patch(
   '/:contactId',
   validation(validateUpdateContact),
-  contactControllers.updateById,
+  controllerWrapper(ctrl.updateById),
 )
 
 module.exports = router
