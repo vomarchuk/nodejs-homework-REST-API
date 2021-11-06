@@ -1,7 +1,5 @@
 const { NotFound } = require('http-error')
-
 const { Contact } = require('../../models')
-
 const updateStatusContactSchema = async (req, res, next) => {
   const { contactId } = req.params
   const { favorite } = req.body
@@ -23,5 +21,4 @@ const updateStatusContactSchema = async (req, res, next) => {
     },
   })
 }
-
 module.exports = updateStatusContactSchema
