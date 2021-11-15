@@ -39,4 +39,4 @@
 
 - login - Voma
 - password - zTLYV8O5sVeXMvW5
-  mongodb+srv://Voma:<password>@cluster0.bqck2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+  mongodb+srv://Voma:zTLYV8O5sVeXMvW5@cluster0.bqck2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
