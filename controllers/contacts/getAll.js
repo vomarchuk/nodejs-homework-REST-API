@@ -2,7 +2,7 @@ const { Contact } = require('../../models')
 const getAll = async (req, res, next) => {
   const { page, limit = 20 } = req.query
 
-  const skip = (page - 1) * limit || 0
+  const skip = page > 0 ? (page - 1) * limit : 0
   const { _id } = req.user
   const result = await Contact.find({ owner: _id }, 'id name email phone', {
     skip,
