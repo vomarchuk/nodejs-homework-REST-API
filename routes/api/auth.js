@@ -14,6 +14,8 @@ router.post('/singup', validation(singupSchema), controllerWrapper(ctrl.singup))
 
 router.post('/singin', validation(singupSchema), controllerWrapper(ctrl.singin))
 
+router.post('/current', authenticate, controllerWrapper(ctrl.currentUser))
+
 router.post('/singout', authenticate, controllerWrapper(ctrl.singout))
 
 module.exports = router
