@@ -6,7 +6,7 @@ const { User } = require('../../models')
 
 const { SECRET_KEY } = process.env
 
-const singin = async (req, res, next) => {
+const signin = async (req, res, next) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
   if (!user || !user.comparePassword(password)) {
@@ -29,4 +29,4 @@ const singin = async (req, res, next) => {
   })
 }
 
-module.exports = singin
+module.exports = signin
