@@ -1,7 +1,7 @@
 const { Conflict } = require('http-error')
 const { User } = require('../../models')
 
-const singup = async (req, res, next) => {
+const signup = async (req, res, next) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
   if (user) {
@@ -22,4 +22,4 @@ const singup = async (req, res, next) => {
   })
 }
 
-module.exports = singup
+module.exports = signup

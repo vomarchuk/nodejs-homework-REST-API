@@ -1,6 +1,11 @@
+const { BadRequest } = require('http-error')
 const { Contact } = require('../../models')
 const getAll = async (req, res, next) => {
   const { page, limit = 20 } = req.query
+  console.log(page)
+  if (isNaN(+page) || isNaN(+limit)) {
+    return next(new BadRequest())
+  }
 
   const skip = page > 0 ? (page - 1) * limit : 0
   const { _id } = req.user
