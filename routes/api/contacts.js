@@ -31,7 +31,7 @@ router.delete(
   controllerWrapper(ctrl.removeContact),
 )
 
-router.patch(
+router.put(
   '/:contactId',
   authenticate,
   validation(updateContactSchema),
