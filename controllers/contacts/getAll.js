@@ -1,8 +1,7 @@
 const { BadRequest } = require('http-error')
 const { Contact } = require('../../models')
 const getAll = async (req, res, next) => {
-  const { page, limit = 20 } = req.query
-  console.log(page)
+  const { page = 0, limit = 20 } = req.query
   if (isNaN(+page) || isNaN(+limit)) {
     return next(new BadRequest())
   }
