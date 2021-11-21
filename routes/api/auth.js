@@ -10,12 +10,12 @@ const {
 
 const { singupSchema } = require('../../models/user')
 
-router.post('/singup', validation(singupSchema), controllerWrapper(ctrl.singup))
+router.post('/signup', validation(singupSchema), controllerWrapper(ctrl.signup))
 
-router.post('/singin', validation(singupSchema), controllerWrapper(ctrl.singin))
+router.post('/signin', validation(singupSchema), controllerWrapper(ctrl.signin))
 
 router.post('/current', authenticate, controllerWrapper(ctrl.currentUser))
 
-router.post('/singout', authenticate, controllerWrapper(ctrl.singout))
+router.post('/signout', authenticate, controllerWrapper(ctrl.signout))
 
 module.exports = router

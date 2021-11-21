@@ -1,5 +1,5 @@
-const singup = require('./singup')
-const singin = require('./singin')
-const singout = require('./singout')
+const signup = require('./signup')
+const signin = require('./signin')
+const signout = require('./signout')
 const currentUser = require('./currentUser')
-module.exports = { singup, singin, singout, currentUser }
+module.exports = { signup, signin, signout, currentUser }
