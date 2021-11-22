@@ -18,6 +18,9 @@ const userSchema = Schema(
       enum: ['starter', 'pro', 'business'],
       default: 'starter',
     },
+    avatarURL: {
+      type: String,
+    },
     token: {
       type: String,
       default: null,
@@ -36,6 +39,8 @@ userSchema.methods.comparePassword = function (password) {
 const singupSchema = Joi.object({
   password: Joi.string().required(),
   email: Joi.string().email().required(),
+  subscription: Joi.string(),
+  avatar: Joi.string(),
 })
 
 const User = model('user', userSchema)
