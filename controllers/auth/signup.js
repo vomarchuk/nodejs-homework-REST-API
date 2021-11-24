@@ -18,7 +18,6 @@ const signup = async (req, res, next) => {
 
   const newUser = new User({ email, avatarURL })
   newUser.setPassword(password)
-  console.log(newUser)
   const { id } = newUser
   const dirPath = path.join(userDir, id)
   await fs.mkdir(dirPath)
