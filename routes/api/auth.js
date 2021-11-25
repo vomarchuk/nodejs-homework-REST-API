@@ -6,6 +6,7 @@ const {
   controllerWrapper,
   validation,
   authenticate,
+  upload,
 } = require('../../middleware/')
 
 const { singupSchema } = require('../../models/user')
@@ -17,5 +18,12 @@ router.post('/signin', validation(singupSchema), controllerWrapper(ctrl.signin))
 router.post('/current', authenticate, controllerWrapper(ctrl.currentUser))
 
 router.post('/signout', authenticate, controllerWrapper(ctrl.signout))
+
+router.patch(
+  '/updateimg',
+  authenticate,
+  upload.single('avatar'),
+  controllerWrapper(ctrl.updateImg),
+)
 
 module.exports = router
