@@ -9,7 +9,7 @@ const { SECRET_KEY } = process.env
 const signin = async (req, res, next) => {
   const { email, password } = req.body
   const user = await User.findOne({ email })
-  if (!user || !user.comparePassword(password)) {
+  if (!user || !user.verify || !user.comparePassword(password)) {
     return next(new Unauthorized('email or password was invalid'))
   }
   const { subscription, _id } = user
