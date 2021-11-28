@@ -4,6 +4,7 @@ const { sendMail } = require('../../helpers')
 
 const repeatVerify = async (req, res, next) => {
   const { email } = req.body
+  console.log(email)
   if (!email) {
     return next(new BadRequest('missing required field email'))
   }
