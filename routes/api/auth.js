@@ -19,6 +19,10 @@ router.post('/current', authenticate, controllerWrapper(ctrl.currentUser))
 
 router.post('/signout', authenticate, controllerWrapper(ctrl.signout))
 
+router.get('/verify/:verificationToken', controllerWrapper(ctrl.verify))
+
+router.post('/verify', controllerWrapper(ctrl.repeatVerify))
+
 router.patch(
   '/updateimg',
   authenticate,

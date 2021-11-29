@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const jwt = require('jsonwebtoken')
-const { Unauthorized } = require('http-error')
+const { Unauthorized, BadRequest } = require('http-error')
 const { User } = require('../../models')
 
 const { SECRET_KEY } = process.env
@@ -11,6 +11,9 @@ const signin = async (req, res, next) => {
   const user = await User.findOne({ email })
   if (!user || !user.comparePassword(password)) {
     return next(new Unauthorized('email or password was invalid'))
+  }
+  if (!user.verify) {
+    return next(new BadRequest('Sorry, need verify your email'))
   }
   const { subscription, _id } = user
 
